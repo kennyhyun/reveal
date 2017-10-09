@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Promise/await
+            table of contents
+            - traditional node asynchronous
+            - es6 promise
+            - es7 await
+            - waiting for resolving async
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## traditional node asynchronous
+            <div class="sl-block-content" style="z-index: 12;">
+              <pre><code>const fs = require('fs')
+console.log('start reading a file...')
+fs.readFile('file.md', 'utf-8', (err, content) => {
+  if (err) {
+    console.log('error happened during reading the file')
+    return console.log(err)
+  }
+  console.log(content)
+})
+console.log('end of the file')</code></pre>
+            </div>
+            <p style="font-size: 65%;">
+              <a target="_" href=https://caolan.github.io/async/docs.html#waterfall>async</a>
+              utility can be used for handling multiple async functions
+            </p>
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## es6 promise
+            <div class="sl-block-content" style="z-index: 12;">
+              <pre><code>const fs = require('fs')
+const promisify = require('es6-promisify')
+const readFile = promisify(fs.readFile)
+console.log('start reading a file...')
+readFile('file.md', 'utf-8')
+  .then(content => {
+    console.log(content)
+  })
+  .then((previousReturnValue) => {
+    // additional code after resolving can come here
+  })
+  .catch(err => {
+    console.log('error happened during reading the file')
+    console.log(err)
+  });
+console.log('end of the file')</code></pre>
+            </div>
+            <p style="font-size: 65%;">
+              <a target="_"
+                href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all>
+                Promise.all
+              </a> and
+              <a target="_"
+                href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race>
+              race
+              </a> can be also used for handling multiple async functions
+            </p>
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## es7 await
+            <div class="sl-block-content" style="z-index: 12;">
+              <pre><code>const fs = require('fs')
+const promisify = require('es6-promisify')
+const readFile = promisify(fs.readFile)
+console.log('start reading a file...')
+const asyncReadFile = async (...args) => {
+  try {
+    console.log(await readFile(...args))
+    // additional code after resolving can come here
+  } catch (err) {
+    console.log('error happened during reading the file')
+    console.log(err)
+  }
+};
+asyncReadFile('file.md', 'utf-8')
+console.log('end of the file')</code></pre>
+            </div>
+            <p style="font-size: 65%;">
+              Sequential execution is only available.
+              However, since the return value of async function is actually Promise,
+              Promise.all/race can be still used.
+            </p>
+          </textarea>
+        </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
