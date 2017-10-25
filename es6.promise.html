@@ -41,15 +41,21 @@
             ## traditional node asynchronous
             <div class="sl-block-content" style="z-index: 12;">
               <pre><code>const fs = require('fs')
-console.log('start reading a file...')
 fs.readFile('file.md', 'utf-8', (err, content) => {
   if (err) {
     console.log('error happened during reading the file')
     return console.log(err)
   }
   console.log(content)
+  fs.readFile('file2.md', 'utf-8', (err, content2) => {
+    if (err) {
+      console.log('error happened during reading the file')
+      return console.log(err)
+    }
+    console.log(content2)
+  }
 })
-console.log('end of the file')</code></pre>
+</code></pre>
             </div>
             <p style="font-size: 65%;">
               <a target="_" href=https://caolan.github.io/async/docs.html#waterfall>async</a>
@@ -58,38 +64,89 @@ console.log('end of the file')</code></pre>
           </textarea>
         </section>
 
-        <section data-markdown>
-          <textarea data-template>
-            ## es6 promise
-            <div class="sl-block-content" style="z-index: 12;">
-              <pre><code>const fs = require('fs')
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ## es6 promise
+              <div class="sl-block-content" style="z-index: 12;">
+                <pre><code>const fs = require('fs')
 const promisify = require('es6-promisify')
 const readFile = promisify(fs.readFile)
-console.log('start reading a file...')
 readFile('file.md', 'utf-8')
-  .then(content => {
-    console.log(content)
-  })
-  .then((previousReturnValue) => {
-    // additional code after resolving can come here
-  })
-  .catch(err => {
-    console.log('error happened during reading the file')
-    console.log(err)
-  });
-console.log('end of the file')</code></pre>
-            </div>
-            <p style="font-size: 65%;">
-              <a target="_"
-                href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all>
-                Promise.all
-              </a> and
-              <a target="_"
-                href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race>
-              race
-              </a> can be also used for handling multiple async functions
-            </p>
-          </textarea>
+.then(content => {
+  console.log(content);
+  return readFile('file2.md', 'utf-8');
+})
+.then((content2) => {
+  console.log(content2);
+})
+.catch(err => {
+  console.log('error happened during reading the file')
+  console.log(err)
+});
+              </div>
+              <p style="font-size: 65%;">
+                <a target="_"
+                  href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all>
+                  Promise.all
+                </a> and
+                <a target="_"
+                  href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race>
+                race
+                </a> can be also used for handling multiple async functions
+              </p>
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ## es6 promise
+              <div class="sl-block-content" style="z-index: 12;">
+                <pre><code>const fs = require('fs')
+const promisify = require('es6-promisify')
+const readFile = promisify(fs.readFile)
+Promise.all([
+  readFile('file.md', 'utf-8'),
+  readFile('file2.md', 'utf-8'),
+])
+.then(([ content, content2 ]) => {
+  console.log(content);
+  console.log(content2);
+})
+.catch(err => {
+  console.log(err)
+});
+                </code></pre>
+              </div>
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ## es6 promise
+              <div class="sl-block-content" style="z-index: 12;">
+                <pre><code>const fs = require('fs')
+const promisify = require('es6-promisify')
+const readFile = promisify(fs.readFile)
+readFile('file.md', 'utf-8')
+.then(content => {
+  console.log(content);
+  if (new Date().getDay() !== 5)
+    throw new Error('it is not Friday');
+  return readFile('file2.md', 'utf-8');
+})
+.then((content2) => {
+  console.log(content2);
+})
+.catch(err => {
+  console.log(err)
+});
+                </code></pre>
+              </div>
+            </textarea>
+          </section>
+
         </section>
 
         <section data-markdown>
@@ -99,21 +156,19 @@ console.log('end of the file')</code></pre>
               <pre><code>const fs = require('fs')
 const promisify = require('es6-promisify')
 const readFile = promisify(fs.readFile)
-console.log('start reading a file...')
-const asyncReadFile = async (...args) => {
+const asyncReadFile = async () => {
   try {
-    console.log(await readFile(...args))
-    // additional code after resolving can come here
+    console.log(await readFile('file.md', 'utf-8'))
+    console.log(await readFile('file2.md', 'utf-8'))
   } catch (err) {
-    console.log('error happened during reading the file')
     console.log(err)
   }
 };
-asyncReadFile('file.md', 'utf-8')
-console.log('end of the file')</code></pre>
+asyncReadFile()
+              </code></pre>
             </div>
             <p style="font-size: 65%;">
-              Sequential execution is only available.
+              Only sequential execution is available.
               However, since the return value of async function is actually Promise,
               Promise.all/race can be still used.
             </p>
