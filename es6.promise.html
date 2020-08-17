@@ -90,7 +90,7 @@ fsp.readFile('file.md', 'utf-8')
 
 - any exception will be caught in the last catch block
 - console.log returns void, any return value in then/catch block become promise
-[Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) and [race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) can be also used for resolving multiple async functions
+- [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) and [race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) can be also used for resolving multiple async functions
 
 
             </textarea>
@@ -136,9 +136,9 @@ const { promises: fsp } = require('fs')
   .catch(err => console.error(err))
 ```
 
-Only sequential execution is available.
-However, since the return value of async function is actually Promise,
-Promise.all/race can be still used.
+- Only sequential execution is available.
+- However, since the return value of async function is actually Promise
+  - Promise.all/race can be still used.
 
 
             </textarea>
