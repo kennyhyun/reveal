@@ -42,7 +42,7 @@
           <textarea data-template>
 ## using callback
 
-```js [3-]
+```js [3-100]
 const fs = require('fs')
 
 fs.readFile('file.md', 'utf-8', (err, content) => {
@@ -76,7 +76,7 @@ Note the nested structure.
 
 ## es6 promise
                 
-```js [3-40]
+```js [3-010]
 const { promises: fsp } = require('fs')
 
 fsp.readFile('file.md', 'utf-8')
@@ -100,7 +100,7 @@ fsp.readFile('file.md', 'utf-8')
 
 ## es6 promise (concurrency)
 
-```js
+```js [3-010]
 const { promises: fsp } = require('fs')
 
 Promise.all([
@@ -124,7 +124,7 @@ Promise.all([
 
 ## es7 await
 
-```js
+```js [3-010]
 const { promises: fsp } = require('fs')
 
 (async () => {
@@ -149,7 +149,7 @@ const { promises: fsp } = require('fs')
 
 ## es7 await (concurrency)
 
-```js
+```js [3-010]
 const { promises: fsp } = require('fs')
 
 Promise.all([
@@ -174,7 +174,7 @@ Promise.all([
 
 ### Async returns promise
 
-```js
+```js [6-010]
 const { promises: fsp } = require('fs')
 
 const printJsonFile = async (file, enc = 'utf-8') =>
