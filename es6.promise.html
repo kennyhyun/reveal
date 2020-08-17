@@ -23,7 +23,10 @@
 
   ### Oct 2017, Kenny Yeo
   ### Aug 20202
-  ---
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
   ## Contents
 
   - Using callback
@@ -31,7 +34,10 @@
   - ES7 await
   - More about promises
   - Running from array
-  ---
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
   ## using callback
 
   ```js
@@ -61,7 +67,12 @@
   [async waterfall](https://caolan.github.io/async/v3/docs.html#waterfall) utility can be used for handling multiple async functions sequencially
 
 
-  ---
+          </textarea>
+        </section>
+
+        <section>
+          <section data-markdown>
+            <textarea data-template>
 
   ## es6 promise
                 
@@ -86,7 +97,10 @@
   [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) and [race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) can be also used for resolving multiple async functions
 
 
-  --
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
 
   ## es6 promise (concurrency)
 
@@ -105,7 +119,13 @@
   ```
 
 
-  ---
+            </textarea>
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown>
+            <textarea data-template>
 
   ## es7 await
 
@@ -127,7 +147,12 @@
   However, since the return value of async function is actually Promise,
   Promise.all/race can be still used.
 
-  --
+
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+
 
   ## es7 await (concurrency)
 
@@ -147,7 +172,10 @@
   ```
 
 
-  --
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
 
   ## es7 await
 
@@ -170,7 +198,12 @@
     .catch(err => console.error(err))
   ```
 
-  ---
+            </textarea>
+          </section>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
 
   ## More about promises
 
@@ -191,8 +224,13 @@
   // -> Promise {<fulfilled>: undefined}
   ```
 
-  ---
 
+        </textarea>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
   ## Running from array
 
   ### Fetch one by one and stop if failed
@@ -211,7 +249,11 @@
     .catch(e => console.error(e))
   ```
 
-  --
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
   ## Running from array
 
   ### Fetch all without awaiting even if failed
@@ -234,8 +276,13 @@
     .catch(e => console.error(e))
   ```
 
-  ---
 
+            </textarea>
+          </section>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
   ## Learn more
 
   - [ES5 async library](https://caolan.github.io/async/v3/docs.html#waterfall)
