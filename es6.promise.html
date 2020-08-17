@@ -42,7 +42,7 @@
           <textarea data-template>
 ## using callback
 
-```js
+```js [3-]
 const fs = require('fs')
 
 fs.readFile('file.md', 'utf-8', (err, content) => {
@@ -76,7 +76,7 @@ Note the nested structure.
 
 ## es6 promise
                 
-```js
+```js [3-40]
 const { promises: fsp } = require('fs')
 
 fsp.readFile('file.md', 'utf-8')
